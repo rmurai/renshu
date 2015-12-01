@@ -7,13 +7,13 @@ skip c s = if (c == last s) && (not $ elem c (init s))
                 Just n -> n+1
                 Nothing -> length s
 
-bm :: String -> String -> Maybe Int --implementation of BMH algorithm
-bm text pat
+bmh :: String -> String -> Maybe Int --implementation of BMH algorithm
+bmh text pat
  | tlgth >= plgth = let checked = take plgth text in
                         if  checked == pat
                         then Just 1
                         else let skip_amount = skip (last checked) pat in
-                                case bm (drop skip_amount text) pat of
+                                case bmh (drop skip_amount text) pat of
                                 Just n -> Just $ n + skip_amount
                                 Nothing -> Nothing
  | otherwise = Nothing
